@@ -40,7 +40,7 @@
         - このmodeの場合はgptの登録は不要（なはず）
     - "gpt": gptで要約
 
-# arXiv_to_slackbot_gemini_ver3.py
+# geminiへの要請 (arXiv_to_slackbot_gemini_ver3.py)
 geminiに論文を要約させるためのprompt。現状以下のように設定しています：
 ```.txt
     制約条件:
@@ -50,7 +50,6 @@ geminiに論文を要約させるためのprompt。現状以下のように設�
     ・要点3
     ```
 ```
-- これは[この記事](https://dev.classmethod.jp/articles/summarize-the-paper-using-chatgpt/)を借用しました。
 # 使用方法
 ## slackでの準備
 - 参考サイト
