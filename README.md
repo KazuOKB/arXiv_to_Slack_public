@@ -1,7 +1,7 @@
 # 概要
 - このスクリプトは、
     - arxiv apiを用いて論文を検索
-    - summaryをgptで要約
+    - summaryをgeminiで要約
     - 論文情報と要約の内容をslackに投稿
 を行います。
 - slackのチャンネルはそれぞれ、arxiv apiで検索する条件ごとに作られていることを想定しています。
