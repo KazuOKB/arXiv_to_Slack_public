@@ -19,7 +19,7 @@
     - Scopeの設定項目
 
 
-# geminiへの要請 (arXiv_to_slackbot_gemini_ver3.py)
+# Geminiへの要請 (arXiv_to_slackbot_gemini.py)
 geminiに論文を要約させるためのprompt。現状以下のように設定しています：
 ```.txt
     制約条件:
