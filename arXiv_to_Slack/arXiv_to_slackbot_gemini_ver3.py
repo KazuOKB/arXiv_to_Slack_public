@@ -16,11 +16,23 @@ absl.logging.set_verbosity(absl.logging.INFO)
 absl.logging.use_absl_handler()
 
 # # GenemiのAPIキー
-genemi_api_key = "AIzaSyCzKzpJ-FKjXvCdGxCRRgiytnPB5g-wVgg"
-# Slack APIトークン
-SLACK_API_TOKEN = "xoxb-1044593597587-8276980833415-yBKi5w5ku0BggMRNHkFeRaj1"  # Bot Tokenをここに記載
+genemi_api_key = "AIzaSyCxXjxo0cnHIAsVy9lssWCrhKtV22mFClc"
+# AIzaSyCxXjxo0cnHIAsVy9lssWCrhKtV22mFClc # OKBのGemini API
+# AIzaSyCzKzpJ-FKjXvCdGxCRRgiytnPB5g-wVgg # 窪田のGemini API
+
+# Slack APIトークン # Bot Tokenをここに記載
+SLACK_API_TOKEN = "xoxb-1044593597587-8749190179634-eHIFfcxFmtbM2oZuDTn6fV7P"
+#"xoxb-1044593597587-8749190179634-eHIFfcxFmtbM2oZuDTn6fV7P" #OKBのToken
+#"xoxb-1044593597587-8276980833415-yBKi5w5ku0BggMRNHkFeRaj1" #窪田のToken
+
 # Slackに投稿するチャンネル名を指定する
 SLACK_CHANNEL = "#test_for_bot"
+
+# 取得する論文の数
+number_of_papers = 20
+
+# Geminiのモデル選択
+gemini_model_name = "gemini-1.5-flash"
 
 def send_slack_message(token, channel, message):
     """
@@ -43,28 +55,32 @@ def send_slack_message(token, channel, message):
         print(f"メッセージの送信に失敗しました")
 
 def get_summary(arxiv_paper):
-    genai.configure(api_key="AIzaSyCzKzpJ-FKjXvCdGxCRRgiytnPB5g-wVgg")
-    model = genai.GenerativeModel("gemini-1.5-flash", system_instruction="""与えられた論文の要点を3点のみでまとめ、以下のフォーマットで日本語で出力してください。
-    ・要点1
-    ・要点2
-    ・要点3            
-    """)
-    text = f"title: {arxiv_paper.title}\nbody: {arxiv_paper.summary}"
-    response = model.generate_content(
-        text,
-        generation_config = genai.GenerationConfig(
-            max_output_tokens=1000,
-            temperature=0.7,
+    try:
+        genai.configure(api_key = genemi_api_key)
+        model = genai.GenerativeModel(gemini_model_name, system_instruction="""与えられた論文の要点を3点のみでまとめ、以下のフォーマットで日本語で出力してください。
+        ・要点1
+        ・要点2
+        ・要点3            
+        """)
+        text = f"title: {arxiv_paper.title}\nbody: {arxiv_paper.summary}"
+        response = model.generate_content(
+            text,
+            generation_config = genai.GenerationConfig(
+                max_output_tokens=1000,
+                temperature=0.7,
+            )
         )
-    )
-    # Initialize absl logging
-    absl.logging.set_verbosity(absl.logging.INFO)
-    absl.logging.use_absl_handler()
-    return str(response.text)
+        # Initialize absl logging
+        absl.logging.set_verbosity(absl.logging.INFO)
+        absl.logging.use_absl_handler()
+        return str(response.text)
+    except Exception as e:
+        print("Gemini API の呼び出しに失敗しました:", e)
+        return "[Gemini API 呼び出し失敗]"
 
 def Translate_to_Japanese(title_in_english):
-    genai.configure(api_key="AIzaSyCzKzpJ-FKjXvCdGxCRRgiytnPB5g-wVgg")
-    model = genai.GenerativeModel("gemini-1.5-flash", system_instruction="""与えられたタイトルを以下のフォーマットで日本語で出力してください。
+    genai.configure(api_key = genemi_api_key)
+    model = genai.GenerativeModel(gemini_model_name, system_instruction="""与えられたタイトルを以下のフォーマットで日本語で出力してください。
     タイトル名
     """)
     text = f"title: {title_in_english}"
@@ -86,10 +102,10 @@ def arXiv_info():
     query = 'cat:gr-qc'
     # arxiv APIで最新の論文情報を取得する
     search = arxiv.Search(
-        query=query,  # 検索クエリ
-        max_results=100,  # 最新の論文3本のみ取得
-        sort_by=arxiv.SortCriterion.SubmittedDate,  # 論文を投稿された日付でソートする
-        sort_order=arxiv.SortOrder.Descending,  # 新しい論文から順に取得する
+        query = query,  # 検索クエリ
+        max_results = number_of_papers,  # 最新の論文n本のみ取得
+        sort_by = arxiv.SortCriterion.SubmittedDate,  # 論文を投稿された日付でソートする
+        sort_order = arxiv.SortOrder.Descending,  # 新しい論文から順に取得する
     )
 
     # 取得結果をリストに変換
@@ -100,7 +116,7 @@ def arXiv_info():
     j = 1
     # 取得した論文リストから情報を表示
     for idx, paper in enumerate(results, start=1): #search.results() にすると新しい順
-        if j == 15:
+        if j == number_of_papers:
             time.sleep(90)
             j = 1
         
