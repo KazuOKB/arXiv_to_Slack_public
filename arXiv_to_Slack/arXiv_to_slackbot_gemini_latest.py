@@ -16,14 +16,10 @@ absl.logging.set_verbosity(absl.logging.INFO)
 absl.logging.use_absl_handler()
 
 # # GenemiのAPIキー
-genemi_api_key = "AIzaSyCxXjxo0cnHIAsVy9lssWCrhKtV22mFClc"
-# AIzaSyCxXjxo0cnHIAsVy9lssWCrhKtV22mFClc # OKBのGemini API
-# AIzaSyCzKzpJ-FKjXvCdGxCRRgiytnPB5g-wVgg # 窪田のGemini API
+genemi_api_key = "your_Gemini"
 
 # Slack APIトークン # Bot Tokenをここに記載
-SLACK_API_TOKEN = "xoxb-1044593597587-8749190179634-eHIFfcxFmtbM2oZuDTn6fV7P"
-#"xoxb-1044593597587-8749190179634-eHIFfcxFmtbM2oZuDTn6fV7P" #OKBのToken
-#"xoxb-1044593597587-8276980833415-yBKi5w5ku0BggMRNHkFeRaj1" #窪田のToken
+SLACK_API_TOKEN = "your_Slack"
 
 # Slackに投稿するチャンネル名を指定する
 SLACK_CHANNEL = "#test_for_bot"
