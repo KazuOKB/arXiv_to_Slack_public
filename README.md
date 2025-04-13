@@ -19,8 +19,9 @@ geminiに論文を要約させるためのprompt。現状以下のように設�
     ```
 ```
 
-## Slack API Token のScopeについて
-OAuth & Permissions にて "chat:write" と "channels:join" を追加。
+## Slack API Token について
+- Scope: OAuth & Permissions にて "chat:write" と "channels:join" を追加。
+- Slack: 呼び出したいチャンネルにてTokenの追加（招待）。
 
 ## APIの参考
 - [arXiv APIについて](https://info.arxiv.org/help/api/user-manual.html)
