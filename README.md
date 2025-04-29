@@ -32,8 +32,8 @@ geminiに論文を要約させるためのprompt。現状以下のように設�
 
 - cron デーモンの設定の仕方
 
-  ターミナルで"crontab -e"とするとvimが開く
-  エディタ内で
+  ターミナルで"crontab -e"とするとvimが開く。
+  そのエディタ内に
 
   "0 11 * * * /some/directories/arXiv_to_Slack/run_arxiv.sh >> /some/directories/arXiv_to_Slack/logs/cron.log 2>&1"
 
