@@ -8,4 +8,5 @@
 cd "$(dirname "$0")"
 
 # (2) conda run で環境"api"のPythonを呼び出しスクリプトを実行
-conda run -n api python3 my_arXiv_slackbot.py
+# activate/source は一切せずに、conda run だけ使う
+/opt/anaconda3/bin/conda run -n api python3 my_arXiv_slackbot.py
