@@ -7,7 +7,8 @@
 - cron デーモンを使って11 am (JST)に自動的に投稿
   
 を行う。
-投稿するSlackのチャンネルはあらかじめ用意されていることを想定。
+投稿するSlackのチャンネルはあらかじめ用意されていることを想定している。
+環境を整えるために environment.yml にAnacondaの仮想環境を用意した。
 
 ## Geminiへの要請 (arXiv_to_slackbot_gemini.py)
 geminiに論文を要約させるためのprompt。現状以下のように設定している：
