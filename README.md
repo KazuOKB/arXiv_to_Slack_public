@@ -1,4 +1,4 @@
-# 概要（共有するときはAPIキーを空白にしておくこと）
+# 概要
 このスクリプトは、
 
 - arXiv APIを用いてgr-qcの論文を最新のものから20本検索
@@ -30,6 +30,7 @@ geminiに論文を要約させるためのprompt。現状以下のように設�
 ファイルの中身は my_arXiv_Slackbot.py の実行コマンドをまとめており "./run_arxiv.sh" で実行。
 11 am (JST)に投稿するようにするために cron デーモンを使用している。
 
+
 - cron デーモンの設定の仕方
 
   ターミナルで"crontab -e"とするとvimが開く。
@@ -42,6 +43,5 @@ geminiに論文を要約させるためのprompt。現状以下のように設�
 
 
 ## APIの参考 (arXiv_paper_info.py)
-- おまけでつけた arXiv_paper_info.py は arXiv API の使い方を練習するファイル
 - [arXiv APIについて](https://info.arxiv.org/help/api/user-manual.html)
 
