@@ -19,5 +19,3 @@ build/
 *.png
 *.pdf
 
-# 特定のファイルを無視する
-my_arXiv_Slackbot.py
